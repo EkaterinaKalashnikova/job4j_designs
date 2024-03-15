@@ -51,9 +51,9 @@ class NameLoadTest {
     @Test
     void checkNames() {
         NameLoad nameLoad = new NameLoad();
-        assertThatThrownBy(() -> nameLoad.parse("="))
+        assertThatThrownBy(nameLoad::parse)
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageMatching("^.+");
+                .hasMessageMatching("Names array is empty");
     }
 }
     
