@@ -49,7 +49,7 @@ class NonNullIteratorTest {
         assertThat(iterator.hasNext()).isFalse();
     }
 
-  /**  @Test
+   @Test
     void allNumbersAreNotNull() {
         iterator = new NonNullIterator(new Integer[]{2, 4, 6, 8});
         assertThat(iterator.hasNext()).isTrue();
@@ -68,6 +68,6 @@ class NonNullIteratorTest {
         iterator = new NonNullIterator(new Integer[]{null, null, null, null});
         assertThat(iterator.hasNext()).isFalse();
         assertThat(iterator.hasNext()).isFalse();
-    }*/
+    }
 }
     
