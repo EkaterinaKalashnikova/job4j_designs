@@ -10,52 +10,47 @@ import static java.util.Spliterators.iterator;
 
 public class CyclicIterator<T> implements Iterator<T> {
 
-    private List<T> data = new ArrayList<>();
-    private final Iterator<T> iterator = data.iterator();
+    private List<T> data;
     private int index;
-
-    public CyclicIterator(List<T> data) {
-        this.data = data;
-    }
 
     public CyclicIterator() {
     }
+
+    public CyclicIterator(List<T> data) {
+        this.data = data;
+        this.index = 0;
+    }
+
     @Override
     public boolean hasNext() {
-        int count = 0;
+        int count = index;
         if (data.isEmpty()) {
             return false;
         }
         if (index >= data.size()) {
             for (T i : data) {
-                count++;
-                if (count == 20) {
+                index = (index + 1) % data.size();
+                if (index == count) {
                     break;
                 }
             }
-          data = (List<T>) iterator;
+            data = (List<T>) iterator();
             index = 0;
         }
         return true;
     }
 
+    @Override
+    public T next() {
+        if (!hasNext()) {
+            throw new NoSuchElementException();
+        }
+        T element = data.get(index);
+        index = (index + 1) % data.size();
+        return element;
+    }
     private Iterator<T> iterator() {
         return new CyclicIterator<>();
     }
-
-    @Override
-    public T next() {
-        index++;
-        return iterator.next();
-    }
-
-    @Override
-    public void remove() {
-        iterator.remove();
-    }
-
-    @Override
-    public void forEachRemaining(Consumer<? super T> action) {
-        Iterator.super.forEachRemaining(action);
-    }
 }
+

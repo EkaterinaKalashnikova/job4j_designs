@@ -35,7 +35,7 @@ class CyclicIteratorTest {
         assertThat(iterator.hasNext()).isTrue();
     }
 
-   /** @Test
+    @Test
     void whenOneElementThenNext() {
         CyclicIterator<Integer> iterator = new CyclicIterator<>(List.of(1));
         assertThat(iterator.hasNext()).isTrue();
@@ -63,6 +63,6 @@ class CyclicIteratorTest {
         assertThat(iterator.hasNext()).isTrue();
         assertThat(iterator.next()).isEqualTo(1);
         assertThat(iterator.hasNext()).isTrue();
-    }*/
+    }
 }
     
