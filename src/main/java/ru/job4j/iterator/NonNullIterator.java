@@ -20,7 +20,6 @@ public class NonNullIterator implements Iterator<Integer> {
         return index < data.length;
     }
 
-
     @Override
     public Integer next() {
         if (!hasNext()) {

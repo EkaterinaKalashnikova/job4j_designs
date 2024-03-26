@@ -23,21 +23,10 @@ public class CyclicIterator<T> implements Iterator<T> {
 
     @Override
     public boolean hasNext() {
-        int count = index;
-        if (data.isEmpty()) {
-            return false;
-        }
         if (index >= data.size()) {
-            for (T i : data) {
-                index = (index + 1) % data.size();
-                if (index == count) {
-                    break;
-                }
-            }
-            data = (List<T>) iterator();
             index = 0;
         }
-        return true;
+        return !data.isEmpty();
     }
 
     @Override
@@ -48,9 +37,6 @@ public class CyclicIterator<T> implements Iterator<T> {
         T element = data.get(index);
         index = (index + 1) % data.size();
         return element;
-    }
-    private Iterator<T> iterator() {
-        return new CyclicIterator<>();
     }
 }
 
