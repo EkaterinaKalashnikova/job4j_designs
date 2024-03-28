@@ -34,9 +34,7 @@ public class CyclicIterator<T> implements Iterator<T> {
         if (!hasNext()) {
             throw new NoSuchElementException();
         }
-        T element = data.get(index);
-        index = (index + 1) % data.size();
-        return element;
+        return data.get(index++);
     }
 }
 
