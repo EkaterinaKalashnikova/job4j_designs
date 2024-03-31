@@ -12,8 +12,6 @@ public class Balancer {
             for (int j = 0; j < nodes.size(); j++) {
                 for (int k = 0; k < list.get(j); k++) {
                       Integer i = source.next();
-                    /** if (nodes.contains(i)) {
-                       list.add(i);*/
                 }
                 source = new Iterator<>() {
                     int index = 0;
