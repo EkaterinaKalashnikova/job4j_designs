@@ -10,7 +10,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class BalancerTest {
- /**  @Test
+   @Test
     void whenSingleAndIteratorThree() {
         List<ArrayList<Integer>> nodes = List.of(
                 new ArrayList<>()
@@ -22,7 +22,7 @@ class BalancerTest {
                         List.of(1, 2, 3)
                 )
         );
-    }*/
+    }
 
     @Test
     void whenThreeListsAndIteratorEmpty() {
@@ -40,7 +40,7 @@ class BalancerTest {
         );
     }
 
-   /** @Test
+    @Test
     void whenTwoListsAndIteratorThree() {
         List<ArrayList<Integer>> nodes = List.of(
                 new ArrayList<>(),
@@ -132,6 +132,6 @@ class BalancerTest {
                 new ArrayList<>(List.of(2, 5)),
                 new ArrayList<>(List.of(3, 6))
         );
-    }*/
+    }
 }
     

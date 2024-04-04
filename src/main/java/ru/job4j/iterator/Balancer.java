@@ -7,7 +7,12 @@ import java.util.NoSuchElementException;
 
 public class Balancer {
     public static void split(List<ArrayList<Integer>> nodes, Iterator<Integer> source) {
-        ArrayList<Integer> list = new ArrayList<>();
+      int index = 0;
+      while (source.hasNext()) {
+          index = index == nodes.size() ? 0 : index;
+          nodes.get(index++).add(source.next());
+      }
+       /** ArrayList<Integer> list = new ArrayList<>();
         nodes.iterator();
         while (source.hasNext()) {
             list.add(source.next());
@@ -40,7 +45,7 @@ public class Balancer {
                 }
                 return list.get(index++);
             }
-        };
+        };*/
     }
 }
 
