@@ -1,0 +1,4 @@
+2024-04-07 20:15:12,900 DEBUG ru.job4j.io.UsageLog4j:main:10 - debug message
+2024-04-07 20:15:12,902  INFO ru.job4j.io.UsageLog4j:main:11 - info message
+2024-04-07 20:15:12,902  WARN ru.job4j.io.UsageLog4j:main:12 - warn message
+2024-04-07 20:15:12,902 ERROR ru.job4j.io.UsageLog4j:main:13 - error message
