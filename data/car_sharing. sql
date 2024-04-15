@@ -1,0 +1,80 @@
+create table renters (
+    id   serial primary key,
+    name varchar(50)
+);
+
+insert into renters (name) values ('Роман Романов');
+insert into renters (name) values ('Лина Волкова');
+insert into renters (name) values ('Сергей Иванов');
+insert into renters (name) values ('Мила Трунова');
+
+create table travels (
+    id serial primary key,
+    time varchar(50)
+);
+
+insert into travels (time) values ('Один час');
+insert into travels (time) values ('Два часа');
+
+create table cars (
+    id serial primary key,
+    name varchar(100),
+    travels_id integer references travels (id)
+);
+
+insert into cars (name, travels_id) values ('Mazda', 1);
+insert into cars (name, travels_id) values ('Mazda', 2);
+insert into cars (name, travels_id) values ('Hyundai', 1);
+insert into cars (name, travels_id) values ('Hyundai', 2);
+insert into cars (name, travels_id) values ('Chevrolet', 1);
+insert into cars (name, travels_id) values ('Chevrolet', 2);
+insert into cars (name, travels_id) values ('Lada', 1);
+insert into cars (name, travels_id) values ('Lada', 2);
+
+create table trips (
+    id serial primary key,
+    active boolean default true,
+    cars_id integer references cars (id),
+    renters_id integer references renters (id)
+);
+
+insert into trips (cars_id, renters_id) values (1, 1);
+insert into trips (cars_id, renters_id) values (2, 2);
+insert into trips (cars_id, renters_id) values (3, 1);
+insert into trips (cars_id, renters_id) values (4, 2);
+insert into trips (cars_id, renters_id) values (5, 1);
+insert into trips (cars_id, renters_id) values (6, 2);
+insert into trips (cars_id, renters_id) values (7, 1);
+insert into trips (cars_id, renters_id) values (8, 2);
+
+select r.name, count(t.time), t.time
+from renters as r
+         join trips tr on r.id = tr.renters_id
+         join cars c on tr.cars_id = c.id
+         join travels t on c.travels_id = t.id
+group by (r.name, t.time)
+having count(t.time) >= 2;
+
+select r.name, count(t.time), c.name
+from renters as r
+         join trips tr on r.id = tr.renters_id
+         join cars c on tr.cars_id = c.id
+         join travels t on c.travels_id = t.id
+group by(r.name, t.time, c.name)
+order by (r.name) limit 2 offset 1;
+
+create view show_renters_with_2_or_more_cars
+as
+select r.name as renter, count(t.time), t.time as travel
+from renters as r
+         join trips tr on r.id = tr.renters_id
+         join cars c on tr.cars_id = c.id
+         join travels t on c.travels_id = t.id
+group by(r.name, t.time, c.name)
+order by (r.name) limit 2 offset 1;
+
+select * from show_renters_with_2_or_more_cars;
+
+alter view show_renters_with_2_or_more_cars rename to choose_renters_with_2_or_more_cars;
+
+select * from choose_renters_with_2_or_more_cars;
