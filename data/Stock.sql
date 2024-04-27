@@ -39,11 +39,6 @@ insert into products (name, producer, count, price) VALUES ('платье', 'pro
 insert into products (name, producer, count, price) VALUES ('футболка', 'producer_5', 5, 20);
 insert into products (name, producer, count, price) VALUES ('брюки', 'producer_6', 4, 45);
 
-insert into history_of_price (price, name, date) VALUES (12, 'перчатки', localtimestamp);
-insert into history_of_price (price, name, date) VALUES (25, 'шапочка', localtimestamp);
-insert into history_of_price (price, name, date) VALUES (37, 'курточка', localtimestamp);
-insert into history_of_price (price, name, date) VALUES (50, 'платье', localtimestamp);
-
 create
     or replace function taxa()
     returns trigger as
@@ -72,10 +67,7 @@ create
     returns trigger as
 $$
 BEGIN
-        select price
-        from products
-        where new.price = price + price * 0.13
-        into new.price;
+    new.price = new.price + new.price * 0.13;
     return NEW;
 END;
 $$
@@ -93,6 +85,7 @@ DELETE from products;
 DELETE FROM history_of_price;
 
 drop trigger pasting_trigger on products;
+drop trigger taxa_trigger on products;
 
 alter table products disable trigger pasting_trigger;
 
