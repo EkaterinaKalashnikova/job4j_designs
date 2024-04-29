@@ -75,8 +75,3 @@ COMMIT;
 
 
 
-
-FETCH 10 FROM cursor_products;
-
-
-MOVE FORWARD 5 FROM cursorback_products;
